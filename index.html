@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Innovation Club Member Poll</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>INNOVATION CLUB MEMBER POLL</h1>
+    <form name="member-poll" method="POST" data-netlify="true" id="pollForm">
+      <input type="hidden" name="form-name" value="member-poll" />
+      
+      <label>Name</label>
+      <input type="text" name="name" required />
+
+      <label>Class and Section</label>
+      <input type="text" name="class_section" required />
+
+      <label>Admission Number</label>
+      <input type="text" name="admission_number" required />
+
+      <div id="vote-section">
+        <label for="vote">Your Vote</label>
+        <p id="vote-question" class="subtitle"></p>
+        <select name="vote" id="vote-dropdown" required></select>
+      </div>
+
+      <label>Remarks</label>
+      <textarea name="remarks"></textarea>
+
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
