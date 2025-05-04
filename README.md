@@ -3,6 +3,8 @@
 
 This is the official voting portal for the Innovation Club, hosted on [https://incvoting.netlify.app](https://incvoting.netlify.app).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/861d1f11-804c-48a9-b3f7-ade0505f877c/deploy-status)](https://app.netlify.com/sites/incvoting/deploys)
+
 ---
 
 ## 📋 Basic Details
