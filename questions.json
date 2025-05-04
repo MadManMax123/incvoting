@@ -1,10 +1,10 @@
 {
-    "question": "Who do you think should be the next Club Leader?",
+    "question": "This is a sample question.",
     "options": [
-      "Alexandra Rivera",
-      "Dev Mehra",
-      "Jordan Singh",
-      "No Preference"
+      "Lorem",
+      "Ipsum",
+      "Dolor",
+      "Amet"
     ]
   }
   
