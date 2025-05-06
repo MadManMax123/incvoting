@@ -5,8 +5,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-  }
+    min-height: 100vh; /* Changed from height to min-height */
+    overflow-y: auto; /* Ensures scrolling is possible */
+}
   
   /* Add a fade-in animation for the container */
   @keyframes fadeIn {
