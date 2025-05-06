@@ -45,6 +45,19 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+  // Parse URL query parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get("name");
+  const class_section = urlParams.get("class");
+  const admission_number = urlParams.get("id");
+
+  // Autofill form if data is available
+  if (name) document.querySelector('input[name="name"]').value = name;
+  if (class_section) document.querySelector('input[name="class_section"]').value = class_section;
+  if (admission_number) document.querySelector('input[name="admission_number"]').value = admission_number;
+</script>
+
 </body>
 
 </html>
