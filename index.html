@@ -5,80 +5,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Innovation Club</title>
   <link rel="stylesheet" href="style.css" />
-<style>
-        .watermark {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 90px;
-            opacity: 0.5;
-        }
-</style>
+  <style>
+    .watermark {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 90px;
+      opacity: 0.5;
+    }
+
+    .button-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    .button-menu button {
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .button-menu button:hover {
+      background-color: #005b99;
+    }
+
+    .button-menu h3 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
   <script>
-fetch('questions.json')
-  .then(res => res.json())
-  .then(data => {
-    const dismissed = localStorage.getItem('devAlertDismissed');
-    if (data.showAlert && dismissed !== 'true') {
-      // Create the popup container
-      const popup = document.createElement('div');
-      popup.style.position = 'fixed';
-      popup.style.top = '0';
-      popup.style.left = '0';
-      popup.style.width = '100%';
-      popup.style.height = '100%';
-      popup.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-      popup.style.display = 'flex';
-      popup.style.justifyContent = 'center';
-      popup.style.alignItems = 'center';
-      popup.style.zIndex = '9999';
+    fetch('questions.json')
+      .then(res => res.json())
+      .then(data => {
+        const dismissed = localStorage.getItem('devAlertDismissed');
+        if (data.showAlert && dismissed !== 'true') {
+          // Create the popup container
+          const popup = document.createElement('div');
+          popup.style.position = 'fixed';
+          popup.style.top = '0';
+          popup.style.left = '0';
+          popup.style.width = '100%';
+          popup.style.height = '100%';
+          popup.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+          popup.style.display = 'flex';
+          popup.style.justifyContent = 'center';
+          popup.style.alignItems = 'center';
+          popup.style.zIndex = '9999';
 
-      // Create the inner content of the popup
-      popup.innerHTML = `
-        <div style="background-color: #ffdddd; padding: 20px; border-radius: 10px; border: 2px solid red; max-width: 500px; text-align: center; color: darkred; font-weight: bold;">
-          🛑 UNDER DEVELOPMENT<br><br>
-          Many parts of this website are under development. Expect incomplete pages, glitchy design, or bugs.<br><br>
-          Kindly report them to the website developers.<br><br>
-          <button style="margin-top: 10px; padding: 5px 15px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="dismissPopup()">OK</button>
-        </div>
-      `;
+          // Create the inner content of the popup
+          popup.innerHTML = `
+            <div style="background-color: #ffdddd; padding: 20px; border-radius: 10px; border: 2px solid red; max-width: 500px; text-align: center; color: darkred; font-weight: bold;">
+              🛑 UNDER DEVELOPMENT<br><br>
+              Many parts of this website are under development. Expect incomplete pages, glitchy design, or bugs.<br><br>
+              Kindly report them to the website developers.<br><br>
+              <button style="margin-top: 10px; padding: 5px 15px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="dismissPopup()">OK</button>
+            </div>
+          `;
 
-      // Append the popup to the body
-      document.body.appendChild(popup);
+          // Append the popup to the body
+          document.body.appendChild(popup);
 
-      // Function to dismiss the popup and store the dismissal in localStorage
-      window.dismissPopup = function() {
-        localStorage.setItem('devAlertDismissed', 'true');
-        popup.remove(); // Remove the popup from the DOM
-      };
-    }
-  })
-  .catch(err => console.error('Error fetching alert data:', err));
-</script>
+          // Function to dismiss the popup and store the dismissal in localStorage
+          window.dismissPopup = function() {
+            localStorage.setItem('devAlertDismissed', 'true');
+            popup.remove(); // Remove the popup from the DOM
+          };
+        }
+      })
+      .catch(err => console.error('Error fetching alert data:', err));
+  </script>
 
   <div class="container">
     <header>
       <div class="logo-container">
         <a href="index.html"><img src="logo.jpg" alt="Watermark Bulb" class="watermark"></a>
       </div>
-     
-
       <h1>INNOVATION CLUB VOTING WEBSITE</h1>
-      
     </header>
     
     <div class="button-menu">
-      <centre><h3>Navigation</h3></centre>
+      <h3>Navigation</h3>
       <a href="rules.html"><button>Rules</button></a>
       <a href="admin.html"><button>Admin Access</button></a>
       <a href="credits.html"><button>Credits</button></a>
       <a href="announcements.html"><button>Announcements</button></a>
       <a href="vote.html"><button>Vote</button></a>
     </div>
+
     <div class="button-menu">
-      <centre><h3>Stats for devs</h3></centre>
+      <h3>Stats for devs</h3>
       <a href="questions.json"><button>Primary configuration JSON</button></a>
       <a href="announcements.json"><button>Announcements JSON</button></a>
       <a href="logo.jpg"><button>Logo</button></a>
@@ -86,8 +122,6 @@ fetch('questions.json')
       <a href="https://github.com/MadManMax123/incvoting"><button>Github</button></a>
     </div>
   </div>
-
-
 
 </body>
 </html>
