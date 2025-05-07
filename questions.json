@@ -1,4 +1,5 @@
 {
+    "showAlert": true
     "active": true,
     "question": "This is a sample question.",
     "options": [
