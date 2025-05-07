@@ -24,43 +24,33 @@ fetch('questions.json')
   .then(data => {
     const dismissed = localStorage.getItem('devAlertDismissed');
     if (data.showAlert && dismissed !== 'true') {
-      // Create the popup container
       const popup = document.createElement('div');
       popup.style.position = 'fixed';
       popup.style.top = '0';
       popup.style.left = '0';
       popup.style.width = '100%';
       popup.style.height = '100%';
-      popup.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      popup.style.backgroundColor = 'rgba(0,0,0,0.7)';
       popup.style.display = 'flex';
       popup.style.justifyContent = 'center';
       popup.style.alignItems = 'center';
       popup.style.zIndex = '9999';
 
+      popup.innerHTML = `
+        <div style="background-color: #ffdddd; padding: 20px; border-radius: 10px; border: 2px solid red; max-width: 500px; text-align: center; color: darkred; font-weight: bold;">
+          🛑 UNDER DEVELOPMENT<br><br>
+          Many parts of this website are under development. Expect incomplete pages, glitchy design or bugs.<br><br>
+          Kindly report them to the website developers.<br><br>
+          <button style="margin-top: 10px; padding: 5px 15px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="localStorage.setItem('devAlertDismissed', 'true'); this.parentElement.parentElement.remove()">OK</button>
+        </div>
+      `;
 
-  // Create the inner content of the popup
-  popup.innerHTML = `
-    <div style="background-color: #ffdddd; padding: 20px; border-radius: 10px; border: 2px solid red; max-width: 500px; text-align: center; color: darkred; font-weight: bold;">
-      🛑 UNDER DEVELOPMENT<br><br>
-      Many parts of this website are under development. Expect incomplete pages, glitchy design, or bugs.<br><br>
-      Kindly report them to the website developers.<br><br>
-      <button style="margin-top: 10px; padding: 5px 15px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="dismissPopup()">OK</button>
-    </div>
-  `;
+      document.body.appendChild(popup);
+    }
+  })
+  .catch(err => console.error('Alert popup error:', err));
+</script>
 
-  // Append the popup to the body
-  document.body.appendChild(popup);
-
-  // Function to dismiss the popup and store the dismissal in localStorage
-  window.dismissPopup = function() {
-    localStorage.setItem('devAlertDismissed', 'true');
-    popup.remove(); // Remove the popup from the DOM
-  };
-}
-
-
-})
-.catch(err => console.error('Error fetching alert data:', err)); </script>
 
   <div class="container">
     <header>
