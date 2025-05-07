@@ -1,12 +1,10 @@
 {
-    "showAlert": true
-    "active": true,
-    "question": "This is a sample question.",
-    "options": [
-      "Lorem",
-      "Ipsum",
-      "Dolor",
-      "Amet"
-    ]
-  }
-  
+  "active": true,
+  "question": "This is a sample question.",
+  "options": [
+    "Lorem",
+    "Ipsum",
+    "Dolor",
+    "Amet"
+  ]
+}
