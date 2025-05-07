@@ -27,5 +27,16 @@
       <a href="vote.html"><button>Vote</button></a>
     </div>
   </div>
+  <script>
+fetch('questions.json')
+  .then(response => response.json())
+  .then(data => {
+    if (data.showAlert) {
+      document.getElementById('dev-alert').style.display = 'block';
+    }
+  })
+  .catch(error => console.error('Error loading alert status:', error));
+</script>
+
 </body>
 </html>
