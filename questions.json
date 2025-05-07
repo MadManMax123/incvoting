@@ -1,5 +1,5 @@
 {
-    "showAlert": "none"
+    "showAlert": "block"
     "active": true,
     "question": "This is a sample question.",
     "options": [
