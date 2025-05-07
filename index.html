@@ -21,31 +21,14 @@
       <div class="logo-container">
         <a href="index.html"><img src="logo.jpg" alt="Watermark Bulb" class="watermark"></a>
       </div>
-      <script>
-fetch('questions.json')
-  .then(res => res.json())
-  .then(data => {
-    const alert = document.createElement('div');
-    alert.style.display = data.showAlert;
-    alert.style.backgroundColor = '#ffdddd';
-    alert.style.border = '2px solid red';
-    alert.style.padding = '10px';
-    alert.style.color = 'darkred';
-    alert.style.fontWeight = 'bold';
-    alert.style.borderRadius = '8px';
-    alert.style.maxWidth = '600px';
-    alert.style.margin = '20px auto';
-    alert.innerHTML = '🛑 UNDER DEVELOPMENT<br>Many parts of this website is under development. Expect incomplete pages, glitchy design or bugs. Kindly report them to the website developers.';
-    document.body.insertBefore(alert, document.body.children[1]); // Insert right after heading
-  });
-</script>
+     
 
       <h1>INNOVATION CLUB VOTING WEBSITE</h1>
       
     </header>
     
     <div class="button-menu">
-      <h2>Navigation</h2>
+      <centre><h3>Navigation</h3></centre>
       <a href="rules.html"><button>Rules</button></a>
       <a href="admin.html"><button>Admin Access</button></a>
       <a href="credits.html"><button>Credits</button></a>
@@ -53,7 +36,7 @@ fetch('questions.json')
       <a href="vote.html"><button>Vote</button></a>
     </div>
     <div class="button-menu">
-      <h2>Stats for devs</h2>
+      <centre><h3>Stats for devs</h3></centre>
       <a href="questions.json"><button>Primary configuration JSON</button></a>
       <a href="announcements.json"><button>Announcements JSON</button></a>
       <a href="logo.jpg"><button>Logo</button></a>
