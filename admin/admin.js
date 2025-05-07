@@ -64,7 +64,7 @@ function uploadJSON(filename, data) {
   return fetch(`https://api.github.com/repos/MadManMax123/incvoting/contents/${filename}`, {
     method: "PUT",
     headers: {
-      "Authorization": "token YOUR_GITHUB_TOKEN",
+      "Authorization": "token process.env.GITHUB_TOKEN",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
