@@ -1,77 +1,57 @@
-const PASSWORD = "INNOVATION";
-let questionsData;
+const PASSWORD = 'INNOVATION';
+const form = document.getElementById('admin-form');
+const questionInput = document.getElementById('question');
+const optionsInput = document.getElementById('options');
+const formState = document.getElementById('formState');
 
 function validatePassword() {
-  const entered = document.getElementById("password").value;
-  if (entered === PASSWORD) {
-    document.getElementById("auth").style.display = "none";
-    document.getElementById("admin-panel").style.display = "block";
+  const input = document.getElementById('password').value;
+  if (input === PASSWORD) {
+    document.getElementById('auth').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
     loadData();
   } else {
-    alert("Incorrect password");
+    alert('Incorrect password!');
   }
 }
 
-function loadData() {
-  fetch('../questions.json')
-    .then(res => res.json())
-    .then(data => {
-      questionsData = data;
-      document.getElementById("question").value = data.question;
-      document.getElementById("options").value = data.options.join(", ");
-      updateFormState(data.active);
-    });
+async function loadData() {
+  const res = await fetch('/questions.json');
+  const data = await res.json();
+
+  questionInput.value = data.question;
+  optionsInput.value = data.options.join(', ');
+  formState.innerText = `Current State: ${data.active ? 'active' : 'inactive'}`;
 }
 
-function updateFormState(state) {
-  document.getElementById("formState").textContent = "Current State: " + (state ? "Enabled" : "Disabled");
-}
-
-document.getElementById("questionForm").addEventListener("submit", (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const question = document.getElementById("question").value;
-  const options = document.getElementById("options").value.split(",").map(o => o.trim());
-  questionsData.question = question;
-  questionsData.options = options;
-  saveData();
-});
 
-document.getElementById("announcementForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const heading = document.getElementById("aHeading").value;
-  const mainText = document.getElementById("aText").value;
+  const question = questionInput.value.trim();
+  const options = optionsInput.value.split(',').map(opt => opt.trim()).filter(Boolean);
 
-  fetch('../announcements.json')
-    .then(res => res.json())
-    .then(data => {
-      data.unshift({ heading, mainText });
-      return uploadJSON('announcements.json', data);
-    })
-    .then(() => alert("Announcement posted!"));
-});
-
-function toggleActive() {
-  questionsData.active = !questionsData.active;
-  updateFormState(questionsData.active);
-  saveData();
-}
-
-function saveData() {
-  uploadJSON('questions.json', questionsData).then(() => alert("Changes saved."));
-}
-
-function uploadJSON(filename, data) {
-  return fetch(`https://api.github.com/repos/MadManMax123/incvoting/contents/${filename}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": "token process.env.GITHUB_TOKEN",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: `Update ${filename}`,
-      content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
-      sha: "", // optional: include current SHA to avoid overwrite issues
-      branch: "main"
-    })
+  const res = await fetch('/.netlify/functions/updateQuestions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question, options })
   });
+
+  const result = await res.json();
+  alert(result.message || 'Question updated!');
+});
+
+async function toggleActive() {
+  const current = formState.innerText.includes('active');
+  const res = await fetch('/.netlify/functions/updateActiveState', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ active: !current })
+  });
+
+  const result = await res.json();
+  if (res.ok) {
+    formState.innerText = `Current State: ${!current ? 'active' : 'inactive'}`;
+  } else {
+    alert('Failed to update form state.');
+  }
 }
