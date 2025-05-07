@@ -1,0 +1,14 @@
+[
+  {
+    "name": "John Doe",
+    "role": "Founder"
+  },
+  {
+    "name": "Jane Smith",
+    "role": "Web Developer"
+  },
+  {
+    "name": "Sam Lee",
+    "role": "Designer"
+  }
+]
