@@ -21,7 +21,7 @@
       <div class="logo-container">
         <a href="index.html"><img src="logo.jpg" alt="Watermark Bulb" class="watermark"></a>
       </div>
-      <div id="dev-alert" style="display:block; background-color: #ffdddd; border: 2px solid red; padding: 10px; color: darkred; font-weight: bold; border-radius: 8px; max-width: 600px; margin: 20px auto;">
+      <div id="dev-alert" style="display: {{showAlert}}; background-color: #ffdddd; border: 2px solid red; padding: 10px; color: darkred; font-weight: bold; border-radius: 8px; max-width: 600px; margin: 20px auto;">
   🛑 UNDER DEVELOPMENT<br>
   Many parts of this website is under development. Expect incomplete pages, glitchy design or bugs. Kindly report them to the website developers.
 </div>
@@ -39,14 +39,16 @@
   </div>
   <script>
 fetch('questions.json')
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
-    if (!data.showAlert) {
-      document.getElementById('dev-alert').style.display = 'none';
+    const alertBox = document.getElementById('dev-alert');
+    if (alertBox.style.display === '{{showAlert}}') {
+      alertBox.style.display = data.showAlert;
     }
   })
-  .catch(error => console.error('Error loading alert status:', error));
+  .catch(err => console.error('Error updating alert box:', err));
 </script>
+
 
 </body>
 </html>
